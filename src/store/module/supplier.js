@@ -17,17 +17,18 @@ const mutations = {
         }      
 }
 const actions = {
-  fetchAction(context,payload,limit) {
+  fetchAction(context) {
       context.commit('fillLoading',true)
       context.commit('fillData',[])
       axios({
-        url: `https://server-live-production.up.railway.app/item?page=${payload}&limit=${limit}`,
+        url: `https://server-live-production.up.railway.app/supplier`,
         method: 'get',
         headers:{
             token : localStorage.getItem('token')
         }
       })      
             .then(({data})=>{       
+                console.log(data)
                     if(state.allItem.length <= 0){
                       context.commit('fillData',data.results)
                       context.commit('fillTotal',data.Total)

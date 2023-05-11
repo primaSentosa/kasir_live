@@ -39,7 +39,17 @@ const routes = [
     path: '/shift',
     name: 'shift',
     component: () => import('../views/Shift.vue')
-  } ,            
+  } ,         
+  {
+    path: '/supplier',
+    name: 'supplier',
+    component: () => import('../views/Supplier.vue')
+  } ,   
+  {
+    path: '/customer',
+    name: 'customer',
+    component: () => import('../views/Customer.vue')
+  } ,          
 ]
 
 const router = new VueRouter({

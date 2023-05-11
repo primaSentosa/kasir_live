@@ -108,6 +108,7 @@
                     label="Uang"
                     v-model="uang"
                     prefix="Rp"
+                    clearable
                     ></v-text-field>
                 </v-col> 
                 <v-col cols="12" md="6">                  
@@ -219,7 +220,7 @@
                                 if (result.isConfirmed) {
                                     this.transaksi.listItem = this.items
                                     this.transaksi.kasir = {username:this.userName,userId:this.userId}
-                                    this.transaksi.id = '-'
+                                    this.transaksi._id = '-'
                                     this.createTransaksi(this.transaksi)
                                     this.dialog = false                                                    
                                 } else if (result.isDenied) {

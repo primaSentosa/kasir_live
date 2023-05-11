@@ -72,7 +72,6 @@
           <v-icon
               small
               @click="deleteItem(item)"
-              v-b-popover.hover.top="'Delete'"
           >
               mdi-delete
           </v-icon>

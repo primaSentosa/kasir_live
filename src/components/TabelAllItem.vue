@@ -8,7 +8,7 @@
           </v-toolbar>
         </v-card>   
 
-        <v-row class="m-4">
+        <v-row class="m-4" v-if="tempShift">
           <!-- kategori -->
             <v-col
             cols="12"
@@ -60,7 +60,7 @@
               small
               dark
               style="margin-top: 10px;"
-              @click.prevent="getByDate()"
+              @click.prevent="getByKategori()"
               >
               Cari
               </v-btn>  
@@ -88,7 +88,7 @@
          <v-simple-table
               fixed-header
               height="400px"
-              v-if="loading === false"
+              v-if="loading === false && tempShift"
           >            
               <template v-slot:default >
               <thead>
@@ -165,6 +165,8 @@
   export default {
     data() {
       return {
+          tempShift: false,
+
           allKategori:[{ item: '-', name: '-' }],
           kategoriPilih:'-',
           allMerkKaca:[{ item: '-', name: '-' }],
@@ -200,7 +202,8 @@
               loading: 'item/getLoading',
               getKategori: 'kategori/getKategori',
               getMerkMobil: 'kategori/getMerkMobil',
-              getMerkKaca: 'kategori/getMerkKaca'
+              getMerkKaca: 'kategori/getMerkKaca',
+              data2: 'shift/getData'
           }),          
           getRole(){
               return this.$store.state.userRole
@@ -246,6 +249,27 @@
               }
               return al;
           },         
+          getByKategori(){     
+                this.fillLoading(true)
+                this.fillData([])
+                axios({
+                    url: `https://server-live-production.up.railway.app/item/kategori?kat=${this.kategoriPilih}&kaca=${this.merkKacaPilih}&mobil=${this.merkMobilPilih}`,
+                    method: 'get',
+                    headers:{
+                        token : localStorage.getItem('token')
+                    }
+                })      
+                        .then(({data})=>{      
+                            this.fillLoading(false)   
+                            this.fillTotal(data.Total)
+                            this.fillData(data.results)
+                        })
+                        .catch(err=>{
+                            this.fillLoading(false)   
+                            console.log('eror')
+                            console.log(err)
+                        })
+            },                  
           search(page){          
               if(this.src === ''){
                       this.fetchItem(1,10)
@@ -292,6 +316,11 @@
         
     },
     watch:{
+            data2: function(){
+                if(this.data2){
+                    this.tempShift = true
+                }
+            },            
           harga: function(){
               if(this.harga){
               var number_string = this.harga.replace(/[^,\d]/g, '').toString()
@@ -330,10 +359,13 @@
           },               
     },
     created(){
-      this.fetchKetegori()
-      this.fetchMerkMobil()
-      this.fetchMerkKaca()
-      this.fetchItem(1,10)
-    }
+                this.fetchKetegori()
+                this.fetchMerkMobil()
+                this.fetchMerkKaca()
+                this.fetchItem(1,10)
+                if(this.data2){
+                    this.tempShift = true
+                }
+        }
   }
 </script>

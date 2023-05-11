@@ -55,7 +55,7 @@
 <script>
   import { mapActions, mapGetters } from 'vuex'
   import Tabelitem from '../components/TabelAllItem.vue'
-  import Billing from '../components/Billing.vue'
+  import Billing from '../components/Billing2.vue'
   import Cart from '../components/Cart.vue'
 
   export default {
@@ -92,7 +92,7 @@
             console.log(this.src)
         },
         data2: function(){
-            if(this.data === null){
+            if(this.data2 === null){
                 this.dialog = true
             }
         },        

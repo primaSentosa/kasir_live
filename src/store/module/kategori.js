@@ -33,7 +33,7 @@ const actions = {
       context.commit('fillLoadingKat',true)    
       context.commit('fillKategori',[])
       axios({
-        url: `http://localhost:3000/kategori`,
+        url: `https://server-live-production.up.railway.app/kategori`,
         method: 'get',
         headers:{
             token : localStorage.getItem('token')
@@ -52,7 +52,7 @@ const actions = {
     context.commit('fillLoadingMobil',true)    
     context.commit('fillMerkMobil',[])
     axios({
-      url: `http://localhost:3000/kategori/mobil`,
+      url: `https://server-live-production.up.railway.app/kategori/mobil`,
       method: 'get',
       headers:{
           token : localStorage.getItem('token')
@@ -71,7 +71,7 @@ const actions = {
     context.commit('fillLoadingKaca',true)    
     context.commit('fillMerkKaca',[])
     axios({
-      url: `http://localhost:3000/kategori/kaca`,
+      url: `https://server-live-production.up.railway.app/kategori/kaca`,
       method: 'get',
       headers:{
           token : localStorage.getItem('token')

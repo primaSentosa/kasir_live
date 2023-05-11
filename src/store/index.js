@@ -4,6 +4,8 @@ import item from './module/item'
 import kategori from './module/kategori'
 import cart from './module/cart'
 import shift from './module/shift'
+import customer from './module/customer'
+import supplier from './module/supplier'
 
 Vue.use(Vuex)
 
@@ -14,7 +16,7 @@ export default new Vuex.Store({
     email: null,
     userId:null,
     userRole:'',
-    url: 'http://localhost:3000'
+    url: 'https://server-live-production.up.railway.app'
   },
   mutations: {
     setLogin(state,payload){
@@ -39,6 +41,8 @@ export default new Vuex.Store({
     item,
     kategori,
     cart,
-    shift
+    shift,
+    customer,
+    supplier
   }
 })

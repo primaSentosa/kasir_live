@@ -71,8 +71,7 @@
           <template v-slot:item.actions="{ item }">
           <v-icon
               small
-              @click="deleteItem(item)"
-              v-b-popover.hover.top="'Delete'"
+              @click="deleteItem(item)"           
           >
               mdi-delete
           </v-icon>

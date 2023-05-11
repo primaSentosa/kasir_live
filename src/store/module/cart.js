@@ -50,7 +50,7 @@ const actions = {
     let tempItem = []
     await payload.listItem.forEach(element => {
       let temp = {
-        _id: element.id,
+        idBarang: element.id,
         kodeBarang: element.kodeBarang,
         nama: element.nama,
         qty: Number(element.qty),
@@ -61,7 +61,7 @@ const actions = {
     });
 
     axios({
-      url: `http://localhost:3000/transaksi/penjualan`,
+      url: `https://server-live-production.up.railway.app/transaksi/penjualan`,
       method: 'post',
       headers:{
           token : localStorage.getItem('token')
@@ -74,7 +74,7 @@ const actions = {
       }
       })
         .then(({data}) =>{
-          payload.id = data._id
+          payload._id = data._id
           payload.listItem = tempItem
           context.commit('fillTransaksi',payload)
           context.commit('fillPrint',true)

@@ -77,7 +77,25 @@
                   <v-list-item-content>
                     <v-list-item-title>Shift</v-list-item-title>
                   </v-list-item-content>
-                </v-list-item>                                     
+                </v-list-item>  
+                
+                <v-list-item link @click="$router.push('/supplier')">
+                  <v-list-item-icon>
+                    <v-icon>mdi-briefcase-account</v-icon>
+                  </v-list-item-icon>
+                  <v-list-item-content>
+                    <v-list-item-title>SUPPLIER</v-list-item-title>
+                  </v-list-item-content>
+                </v-list-item>   
+
+                <v-list-item link @click="$router.push('/customer')">
+                  <v-list-item-icon>
+                    <v-icon>mdi-account-group</v-icon>
+                  </v-list-item-icon>
+                  <v-list-item-content>
+                    <v-list-item-title>CUSTOMER</v-list-item-title>
+                  </v-list-item-content>
+                </v-list-item>                   
             </v-list>
   
             <template v-slot:append>

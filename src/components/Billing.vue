@@ -6,7 +6,7 @@
                   <br>08123456789</p>
               <small>____________________</small>
               <div>
-                  <small>Id.Transaksi : {{transaksi.id}}</small>
+                  <small>Id.Transaksi : {{transaksi._id}}</small>
                   <br>
                   <small>Tanggal : {{getDateFull}}</small>
                   <br>

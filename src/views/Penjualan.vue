@@ -40,6 +40,7 @@
                   </v-data-table> 
        
        <Billing v-if="print" />
+       
        <!--all item list  -->
       <v-dialog
           v-model="dialog"

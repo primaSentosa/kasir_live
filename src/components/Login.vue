@@ -3,9 +3,9 @@
       <div class="container">
         <div class="row" style="margin-top: 25px;">
             <div class="col-lg-6 col-md-8 login-box">
-                <div class="col-lg-12 login-title" style="color: #04428D;">
-                    Sign In
-                </div>
+                <div class="col-lg-12 login-key">
+                    <img src="../assets/logo1.jpg" width="150" alt="icon">
+                </div>                
 
                 <div class="col-lg-12 login-form">
                     <div class="col-lg-12 login-form">
