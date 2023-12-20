@@ -16,7 +16,7 @@ export default new Vuex.Store({
     email: null,
     userId:null,
     userRole:'',
-    url: 'https://server-live-d54d413311de.herokuapp.com'
+    url: 'https://server-live-d54d413311de.herokuapp.com/'
   },
   mutations: {
     setLogin(state,payload){
