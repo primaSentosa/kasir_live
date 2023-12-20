@@ -253,7 +253,7 @@
                 this.fillLoading(true)
                 this.fillData([])
                 axios({
-                    url: `https://server-live-production.up.railway.app/item/kategori?kat=${this.kategoriPilih}&kaca=${this.merkKacaPilih}&mobil=${this.merkMobilPilih}`,
+                    url: `https://server-live-d54d413311de.herokuapp.com/item/kategori?kat=${this.kategoriPilih}&kaca=${this.merkKacaPilih}&mobil=${this.merkMobilPilih}`,
                     method: 'get',
                     headers:{
                         token : localStorage.getItem('token')

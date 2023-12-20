@@ -336,7 +336,7 @@
                                     }                
 
                                     axios({
-                                    url: `https://server-live-production.up.railway.app/transaksi/pembelian`,
+                                    url: `https://server-live-d54d413311de.herokuapp.com/transaksi/pembelian`,
                                     method: 'post',
                                     headers:{
                                         token : localStorage.getItem('token')

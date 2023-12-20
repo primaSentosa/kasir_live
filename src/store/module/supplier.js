@@ -21,7 +21,7 @@ const actions = {
       context.commit('fillLoading',true)
       context.commit('fillData',[])
       axios({
-        url: `https://server-live-production.up.railway.app/supplier`,
+        url: `https://server-live-d54d413311de.herokuapp.com/supplier`,
         method: 'get',
         headers:{
             token : localStorage.getItem('token')
