@@ -68,7 +68,7 @@
       }),        
       login(){
          axios({
-              url:`${this.$store.state.url}/user/admin/login`,              
+              url:`https://server-live-d54d413311de.herokuapp.com/user/admin/login`,              
               method: 'post',
               data:{
                 email: this.email,
