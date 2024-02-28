@@ -166,7 +166,7 @@
             return {
                     dialog: false,
                     uang: null,
-                    pembayaran: ['Tunai', 'Bon'],
+                    pembayaran: ['Tunai', 'Transfer'],
                     transaksi:{
                         total: 0,
                         bayar: 0,
@@ -177,7 +177,7 @@
             },
             methods: {
                 ...mapActions({
-                    createTransaksi: 'cart/createTransaksi',
+                    createTransaksi: 'cart/createTransaksi'
                 }),              
                 ...mapMutations({
                     fillItem: 'cart/fillItem',
@@ -304,7 +304,7 @@
             
                         this.uang = rupiah
                     }
-                },
+                }
             }
         }
     

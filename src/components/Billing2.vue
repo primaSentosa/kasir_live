@@ -1,136 +1,68 @@
 <template>
-<div class="continuous_form landscape">
-    <!-- Each sheet element should have the class "sheet" -->
-    <!-- "padding-**mm" is optional: you can set 10, 15, 20 or 25 -->
-    <section class="sheet padding-5mm">
-        <!-- Write HTML just like a web page -->
-        <!-- <article>This is an Continuous Form document.</article> -->
-
-        <table style="table-layout: fixed;">
-            <colgroup>
-                <col style="<?= 'width: ' . $cols[0] . 'px'; ?>">
-                <col style="<?= 'width: ' . $cols[1] . 'px'; ?>">
-                <col style="<?= 'width: ' . $cols[2] . 'px'; ?>">
-                <col style="<?= 'width: ' . $cols[3] . 'px'; ?>">
-                <col style="<?= 'width: ' . $cols[4] . 'px'; ?>">
-                <col style="<?= 'width: ' . $cols[5] . 'px'; ?>">
-                <col style="<?= 'width: ' . $cols[6] . 'px'; ?>">
-            </colgroup>
-            <thead>
-                <tr>
-                    <td colspan="2" rowspan="3" style="background-image: url(<?= base_url('images/logo.png') ?>);
-                        background-size: contain;
-                        background-repeat-x: no-repeat;
-                        background-size: 150px;">
-                    </td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td style="text-align: left;" colspan="2">Bandung, {{getDateFull}}</td>
-                </tr>
-                <tr>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td style="text-align: left;" colspan="2">Kepada Yth.</td>
-                </tr>
-                <tr>
-                    <td colspan="2"></td>
-                    <td></td>
-                    <td style="text-align: left;" colspan="2">Daniel</td>
-                </tr>
-            </thead>
-            <tbody>
-                <tr>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                </tr>
-                <tr>
-                    <td colspan="2">No. Faktur :{{ transaksi._id }}</td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                </tr>
-                <tr style="text-align: center;font-weight:bold;">
-                    <td style="border: 1px solid black; text-align: center;" colspan="2">Nama Barang</td>
-                    <td style="border: 1px solid black; text-align: center;">Pcs</td>
-                    <td style="border: 1px solid black; text-align: center;">Harga</td>
-                    <td style="border: 1px solid black; text-align: center;">Subtotal</td>
-                </tr>
-
-                <tr v-for="item in items" :key="item._id">
-                    <td style="border: 1px solid black; text-align: left;" colspan="2">{{ item.nama }}</td>
-                    <td style="border: 1px solid black; text-align: right;">{{ item.qty }}</td>
-                    <td style="border: 1px solid black; text-align: right;">Rp {{ getRupiah(item.harga) }}</td>
-                    <td style="border: 1px solid black; text-align: right;">Rp {{getRupiah(item.harga * item.qty)}}</td>
-                </tr>
-                    <tr>
-                        <td style="border: 1px solid black; text-align: left;"></td>
-                        <td style="border: 1px solid black; text-align: left;" colspan="2"></td>
-                        <td style="border: 1px solid black; text-align: left;"></td>
-                        <td style="border: 1px solid black; text-align: left;"></td>
-                        <td style="border: 1px solid black; text-align: left;"></td>
-                        <td style="border: 1px solid black; text-align: left;"></td>
+<div class="page-container">
+        <main class="main-content">
+            <div id="invoice-app">
+                <div class="header">
+                    <div>
+                        <h1>Invoice Prima Jaya</h1>
+                        <small>Id.Transaksi : {{transaksi._id}}</small>
+                        <br>
+                        <small>Tanggal : {{getDateFull}}</small>
+                        <br>
+                        <small>Kasir : {{userName}}</small>   
+                    </div>
+                    <div>
+                        <div class="section-spacer">
+                            
+                        </div>
+                        <div class="section-spacer">
+                            <!-- <p><strong>Bill to:</strong></p> -->
+                            
+                        </div>
+                    </div>
+                </div>
+                <table class="responsive-table">
+                    <thead>
+                        <tr>
+                            <th>No</th>
+                            <th>Item</th>
+                            <th>Harga</th>
+                            <th>Qty</th>
+                            <th>Total</th>
+                            <th></th>
+                        </tr>
+                    </thead>
+                    <tr v-for="(item, index) in items">
+                        <td data-label="No">{{ index + 1 }}</td>
+                        <td data-label="Item">{{item.nama}}</td>
+                        <td data-label="Harga">Rp {{ getRupiah(item.harga)  }}</td>
+                        <td data-label="Qty">{{ item.qty }}</td>
+                        <td data-label="Total">Rp {{getRupiah(item.harga * item.qty)}}</td>
                     </tr>
-                <tr>
-                    <td style="border: 1px solid black; text-align: center;" colspan="3">Total</td>
-                    <td style="border: 1px solid black; text-align: right;"></td>
-                    <td style="border: 1px solid black; text-align: right;"></td>
-                    <td style="border: 1px solid black; text-align: right;"></td>
-                    <td style="border: 1px solid black; text-align: right;">Rp {{getRupiah(transaksi.totalHarga)}}</td>
-                </tr>
-                <tr>
-                    <td colspan="7"></td>
-                </tr>
-                <tr>
-                    <td colspan="7">
-                        <table>
-                            <colgroup>
-                                <col style="<?= 'width: ' . $footer[0] . 'px'; ?>">
-                                <col style="<?= 'width: ' . $footer[1] . 'px'; ?>">
-                                <col style="<?= 'width: ' . $footer[2] . 'px'; ?>">
-                                <col style="<?= 'width: ' . $footer[3] . 'px'; ?>">
-                                <col style="<?= 'width: ' . $footer[4] . 'px'; ?>">
-                            </colgroup>
-                            <thead>
-                                <tr>
-                                    <th>Hormat Kami</th>
-                                    <th></th>
-                                    <th></th>
-                                    <th></th>
-                                    <th>Penerima</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr>
-                                    <td style="border-bottom: 1px solid black;"></td>
-                                    <td></td>
-                                    <td style="border: 1px solid black;">
-                                        <span style="text-align: center;font-weight:bold;">Perhatian!!!</span><br />
-                                        <span style="text-align: left">
-                                            1. Barang diterima dengan baik dan sesuai dengan pembelian<br />
-                                            2. Kehilangan / kerusakan diluar Toko, bukan tanggung jawab Kami.<br />
-                                            3. Barang yang sudah dibeli tidak boleh dikembalikan.
-                                        </span>
-                                    </td>
-                                    <td></td>
-                                    <td style="border-bottom: 1px solid black;"></td>
-                                </tr>
-                            </tbody>
-                        </table>
-                    </td>
-                </tr>
-            </tbody>
-        </table>
-    </section>
-</div>
+                </table>
+
+                <table>
+                    <tr class="text-bold">
+                        <td>Total</td>
+                        <td>Rp {{getRupiah(transaksi.total)}}</td>
+                    </tr>
+                    <tr >
+                        <td>Bayar</td>
+                        <td>Rp {{getRupiah(transaksi.bayar)}}</td>
+                    </tr>
+                    <tr >
+                        <td>Pembayaran</td>
+                        <td>{{transaksi.pembayaran}}</td>
+                    </tr> 
+                    <tr >
+                        <td>Kembali</td>
+                        <td>Rp {{getRupiah(transaksi.total - transaksi.bayar)}}</td>
+                    </tr>                                         
+                </table>
+            </div>
+            
+        </main>
+    </div>
   
 </template>
   
@@ -140,7 +72,7 @@
     export default {
       data() {
         return {    
-            show: false
+            show: false,           
         }
       },
       computed:{
@@ -169,8 +101,8 @@
           print(){
               this.fillPrint(true)
               this.show = true
-          },
-          printOke(){
+            },
+            printOke(){
               window.print()
               this.fillPrint(false)
               this.fillItem(false)
@@ -230,88 +162,183 @@
       },
       created(){        
           this.show = false
-          console.log(this.transaksi)
           this.print()
+
+        //   console.log(this.transaksi)
       }
     }
   </script>
   
   <style scoped>
-  * {
-      font-size: 12px;
-      font-family: 'Times New Roman';
-  }
-  
-  td,
-  th,
-  tr,
-  table {
-      border-top: 1px solid black;
-      border-collapse: collapse;
-  }
-  
-  td.description,
-  th.description {
-      width: 58mm;
-      max-width: 58mm;
-  }
-  
-  td.quantity,
-  th.quantity {
-      width: 58mm;
-      max-width: 58mm;
-      word-break: break-all;
-  }
-  
-  /* td.price,
-  th.price {
-      width: 58mm;
-      max-width: 58mm;
-      word-break: break-all;
-  } */
-  
-  .centered {
-      text-align: center;
-      align-content: center;
-  }
-  
-  .ticket {
-      width: 58mm;
-      max-width: 58mm;
-  }
-  
-  img {
-      max-width: inherit;
-      width: inherit;
-  }
-  
-  @media print {
-      .hidden-print,
-      .hidden-print * {
-          display: none !important;
-      }
-  }
-  
-  @page {
-      size:58mm;
-      margin: 0mm;
-  }
-  
-  
-  /* @page {
-      size: 58mm 100mm;
-      margin: 0;
-  }
-  @media print {
-      .page {
-          margin: 0;
-          border: initial;
-          border-radius: initial;
-          width: initial;
-          min-height: initial;
-          box-shadow: initial;
-          background: initial;
-          page-break-after: always;
-      }
-  } */
+
+.main-content {
+    min-height: 100vh;
+    padding: 1rem;
+    justify-content: center;
+    align-items: center;
+    @media print {
+        align-items: flex-start;
+    }
+}
+
+
+#invoice-app {
+    padding: 2rem;
+    border-radius: 0.5rem;
+}
+
+.header {
+    @media (min-width: 761px) {
+        display: flex;
+    }
+
+    > div {
+        &:nth-child(-n+1){
+            @media (min-width: 761px) {
+                order: 1;
+                flex: 1;
+                text-align: right;
+                padding-left: 1rem;
+            }
+        }
+    }
+}
+
+.section-spacer {
+    margin: 1rem 0;
+}
+
+textarea {
+    width: 100%;
+    min-height: 80px;
+}
+
+select {
+    @media 
+    only screen and (max-width: 760px) {
+        width: 100%;
+    }
+
+    @media print {
+        appearance: none;
+    }
+}
+
+.company-name {
+    font-size: 2rem;
+}
+
+table{
+    width: auto; 
+    border-collapse: collapse; 
+    margin: 2rem 0;
+    
+    thead{
+        th {
+            padding: 0.5rem 1rem;
+
+            &:nth-child(-n+1){
+                padding-left: 0;
+            }
+            &:nth-last-child(-n+1){
+                padding-right: 0;
+            }
+        }
+    }
+    
+    tr { 
+        border-bottom: 1px solid;
+
+        td {
+            padding: 0.5rem 1rem;
+
+            &:nth-child(-n+1){
+                padding-left: 0;
+            }
+            &:nth-last-child(-n+1){
+                padding-right: 0;
+            }
+
+            input {
+                width: 100%;
+            }
+
+            .cell-with-input {
+                display: flex;
+
+                input {
+                    margin: 0 0.2rem;
+                }
+            }
+        }
+    }
+}
+
+.responsive-table {
+    width: 100%;
+    @media 
+    only screen and (max-width: 760px) {
+
+        table, thead, tbody, th, td, tr { 
+            display: block; 
+        }
+
+        thead tr { 
+            position: absolute;
+            top: -9999px;
+            left: -9999px;
+        }
+
+        tr {
+            padding: 2rem 0;
+        }
+
+        
+        td[data-label] {
+            position: relative;
+            padding-left: 40%; 
+            display: flex;
+            align-items: center;
+
+            &:before { 
+                content: attr(data-label);
+                position: absolute;
+                top: 0.5rem;
+                left: 0;
+                width: 35%; 
+                padding-right: 10px; 
+                white-space: nowrap;
+                font-weight: bold;
+            }
+        }
+    }
+}
+
+button {
+
+    border: none;
+    border-radius: 100px;
+    padding: 0.5rem 1rem;
+    cursor: pointer;
+    transition: background-color 0.3s ease-in-out;
+
+
+
+
+
+    @media print {
+        display: none;
+    }
+
+
+
+}
+
+.text-right {
+    text-align: right;
+}
+
+.text-bold {
+    font-weight: bold;
+}
   </style>

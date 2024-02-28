@@ -94,7 +94,7 @@
               <thead>
                   <tr>
                       <th class="text-left" style="color:#000000;background-color: #d4d4d4;">
-                      <h5>Kode</h5>
+                      <h5>Kategori</h5>
                   </th>                        
                   <th class="text-left" style="color:#000000;background-color: #d4d4d4;">
                       <h5>Nama</h5>
@@ -115,7 +115,7 @@
                   v-for="item in allItem"
                   :key="item._id"
                   >           
-                  <td>{{ item.kodeBarang }}</td>
+                  <td>{{ item.kategori.nama }}</td>
                   <td>{{ item.nama }}</td>
                   <td>Rp {{getRp(item.harga) }}</td>
                   <td>{{ item.stok }}</td>
@@ -249,7 +249,9 @@
               }
               return al;
           },         
-          getByKategori(){     
+          getByKategori(){    
+            console.log(this.allItem)  
+
                 this.fillLoading(true)
                 this.fillData([])
                 axios({
@@ -270,7 +272,7 @@
                             console.log(err)
                         })
             },                  
-          search(page){          
+          search(page){        
               if(this.src === ''){
                       this.fetchItem(1,10)
               } else{
@@ -366,6 +368,7 @@
                 if(this.data2){
                     this.tempShift = true
                 }
+                
         }
   }
 </script>

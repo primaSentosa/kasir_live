@@ -83,7 +83,7 @@
   
   <script>
     import { mapActions, mapGetters } from 'vuex'
-    import Billing from '../components/Billing.vue'
+    import Billing from '../components/Billing2.vue'
     
   
     export default {
